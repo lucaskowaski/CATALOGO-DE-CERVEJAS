@@ -1,0 +1,59 @@
+<h2>Cerveja</h2>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+<div *ngIf="sucessMessage" class="alert alert-success">
+    {{sucessMessage}}
+</div>
+
+<form (ngSubmit)="save(form)" #form="ngForm">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="label">Nome</label>
+            <input required #name="ngModel" [(ngModel)]="beer.name" name="_name" required type="text"
+                class="form-control">
+            <input-errors [field]="name"></input-errors>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="label">Marca</label>
+            <input required #brand="ngModel" [(ngModel)]="beer.brand" name="_brand" required type="text"
+                class="form-control">
+            <input-errors [field]="brand"></input-errors>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="label">família</label>
+            <input required #_familia="ngModel" [(ngModel)]="beer.family" name="_familia" required type="text"
+                class="form-control">
+            <input-errors [field]="_familia"></input-errors>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="label">Estilo</label>
+            <input required #_style="ngModel" [(ngModel)]="beer.style" name="_style" required type="text"
+                class="form-control">
+            <input-errors [field]="_style"></input-errors>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="label">ABV</label>
+            <input required #_abv="ngModel" [(ngModel)]="beer.abv" name="_abv" required type="number"
+                class="form-control">
+            <input-errors [field]="_abv"></input-errors>
+        </div>
+        <div class="col-md-6 form-group">
+            <label class="label">IBU</label>
+            <input required #_ibu="ngModel" [(ngModel)]="beer.ibu" name="_ibu" required type="number"
+                class="form-control">
+            <input-errors [field]="_ibu"></input-errors>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="label">Ingredientes</label>
+            <select multiple required #_beerIngredients="ngModel" [(ngModel)]="beerIngredients" name="_beerIngredients" class="form-control">
+                <option *ngFor="let ingredient of ingredients" [ngValue]="ingredient.id">{{ingredient.description}}
+                </option>
+            </select>
+            <input-errors [field]="_beerIngredients"></input-errors>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

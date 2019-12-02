@@ -1,0 +1,64 @@
+<h2>Cadastro de Receitas</h2>
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+<div *ngIf="sucessMessage" class="alert alert-success">
+    {{sucessMessage}}
+</div>
+<form (ngSubmit)="save(form)" #form="ngForm">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="label">Cerveja</label>
+            <input readonly [(ngModel)]="beer.name" name="_name" required type="text" class="form-control">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 form-group">
+            <label class="label">Garrafa</label>
+            <select [(ngModel)]="recipe.bottleSize" name="_bottleSize" class="form-control">
+                <option [ngValue]="600"> 600 ML</option>
+                <option [ngValue]="1000"> 1 L</option>
+                <option [ngValue]="1500"> 1,5 L</option>
+            </select>
+        </div>
+    </div>
+    <div *ngFor="let ingredient of recipeIngredients">
+        <div class="row">
+            <div class="col-md-6 form-group">
+                <label class="label">Ingrediente</label>
+                <input readonly [(ngModel)]="ingredient.ingredient.description" name="_ingredientDescriprion" required
+                    type="text" class="form-control">
+            </div>
+            <div class="col-md-4 form-group">
+                <label class="label">Quantidade</label>
+                <input type="number" #_ingredientAmount="ngModel" required [(ngModel)]="ingredient.quantity"
+                    name="_ingredientAmount" required class="form-control">
+                <input-errors [field]="_ingredientAmount"></input-errors>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success mr-2">Salvar</button>
+    <button (click)="newRecepeStruture()" *ngIf="recipe.id" type="button" class="btn btn-primary">Novo Castro</button>
+</form>
+
+<h2 class="mt-3">Receitas Cadastradas</h2>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th>Garrafa</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let recipe of recipes">
+            <td>{{recipe.bottleSize}} ML</td>
+            <td>
+                <button (click)="editRecipe(recipe)" type="button"
+                    class="btn btn-outline-primary btn-sm mr-2">Editar</button>
+                <button (click)="remove(recipe)" type="button"
+                    class="btn btn-outline-danger btn-sm mr-2">Excluir</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

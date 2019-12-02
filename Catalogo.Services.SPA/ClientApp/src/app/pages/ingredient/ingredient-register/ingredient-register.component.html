@@ -1,0 +1,19 @@
+<h2 class="mb-3">Ingredient</h2>
+<div *ngIf="errorMessage" class="alert alert-danger">
+  {{errorMessage}}
+</div>
+<div *ngIf="sucessMessage" class="alert alert-success">
+  {{sucessMessage}}
+</div>
+
+<form (ngSubmit)="save(form)"  #form="ngForm">
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label class="label">Descrição</label>
+            <input required #description="ngModel" [(ngModel)]="ingredient.description" name="description" required type="text"
+                class="form-control">
+            <input-errors [field]="description"></input-errors>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

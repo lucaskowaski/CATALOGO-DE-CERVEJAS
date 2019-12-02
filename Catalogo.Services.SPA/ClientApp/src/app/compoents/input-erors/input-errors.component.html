@@ -1,0 +1,7 @@
+<ng-container *ngIf="field.invalid && !field.pristine && !field.untouched">
+  <ng-container *ngFor="let e of field.errors | objectKeys">
+    <div *ngIf="messages[e]" class="text-danger">
+      {{messages[e]}}
+    </div>
+  </ng-container>
+</ng-container>

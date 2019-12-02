@@ -1,0 +1,28 @@
+<h2>Ingrediente</h2>
+<form class="form-inline" (ngSubmit)="search()">
+  <div class="form-group mb-2 mr-2">
+    <input placeholder="Pesquisar" id="searchTerm" required #description="ngModel" [(ngModel)]="searchTerm"
+      name="description" required type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-success mb-2 mr-2" type="submit">Pesquisar</button>
+  <button (click)="cleanFilters()" type="button" class="btn btn-info mb-2 mr-2">Limpar Filtro</button>
+  <a [routerLink]="['/ingredient-register']" class="btn btn-primary mb-2"> Novo</a>
+</form>
+
+<table class="table">
+  <thead class="thead-light">
+    <tr>
+      <th>Descrição</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of ingredients">
+      <td>{{i.description}}</td>
+      <td>
+        <button (click)="editar(i)" type="button" class="btn btn-outline-primary btn-sm mr-2">Editar</button>
+        <button (click)="excluir(i)" type="button" class="btn btn-outline-danger btn-sm">Excluir</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
